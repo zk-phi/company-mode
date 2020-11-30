@@ -101,7 +101,6 @@ so we can't just use the preceding variable instead.")
          (let ((length (plist-get (nthcdr 4 res) :company-prefix-length))
                (prefix (buffer-substring-no-properties (nth 1 res) (point))))
            (cond
-            ((> (nth 2 res) (point)) 'stop)
             (length (cons prefix length))
             (t prefix))))))
     (`candidates
