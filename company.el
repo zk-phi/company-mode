@@ -930,20 +930,12 @@ Matching is limited to the current line."
 (defun company-grab-symbol ()
   "If point is at the end of a symbol, return it.
 Otherwise, if point is not inside a symbol, return an empty string."
-  (if (looking-at "\\_>")
-      (buffer-substring (point) (save-excursion (skip-syntax-backward "w_")
-                                                (point)))
-    (unless (and (char-after) (memq (char-syntax (char-after)) '(?w ?_)))
-      "")))
+  (buffer-substring (point) (save-excursion (skip-syntax-backward "w_") (point))))
 
 (defun company-grab-word ()
   "If point is at the end of a word, return it.
 Otherwise, if point is not inside a symbol, return an empty string."
-  (if (looking-at "\\>")
-      (buffer-substring (point) (save-excursion (skip-syntax-backward "w")
-                                                (point)))
-    (unless (and (char-after) (eq (char-syntax (char-after)) ?w))
-      "")))
+  (buffer-substring (point) (save-excursion (skip-syntax-backward "w") (point))))
 
 (defun company-grab-symbol-cons (idle-begin-after-re &optional max-len)
   "Return a string SYMBOL or a cons (SYMBOL . t).
