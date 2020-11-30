@@ -1709,6 +1709,10 @@ prefix match (same case) will be prioritized."
 
 (defun company-finish (result)
   (company--insert-candidate result)
+  (when (and (looking-at "\\(?:\\sw\\|\\s_\\)+")
+             (save-match-data
+               (string-match (regexp-quote (match-string 0)) result)))
+    (delete-region (match-beginning 0) (match-end 0)))
   (company-cancel result))
 
 (defsubst company-keep (command)
